@@ -16,7 +16,7 @@ npm run demo
 node bin/question-forge.mjs examples/experiment.json /tmp/question-experiment.json --predictor examples/demo-predictor.mjs
 ```
 
-The demo uses a tiny keyword fixture to illustrate the workflow. Its accuracy number is synthetic and is **not a Jev benchmark**. Install as a dependency with `npm install github:gbesse/question-forge#v0.1.0`.
+The demo uses a tiny keyword fixture to illustrate the workflow. Its accuracy number is synthetic and is **not a Jev benchmark**. Install as a dependency with `npm install github:gbesse/question-forge#v0.1.1`.
 
 Set `TYPESAFE_API_KEY` and use `--jev` instead of the fixture predictor to evaluate the actual formulations with pinned `jev-1.13.0`.
 
@@ -46,6 +46,10 @@ console.log(report.selectedCandidate.id, report.heldout.accuracy);
 [Predictor and proposer contracts](docs/plugins.md) support other models or external search algorithms. A proposer can improve formulations from development mistakes; there is no built-in text-generation provider. Up to 32 candidates per batch, 128 total and 100,000 prediction calls are allowed. Before each batch, the engine reserves enough calls for the final heldout evaluation; insufficient budget fails the whole experiment. The budget counts predictions, not tokens, dollars or proposer calls.
 
 Results retain candidate formulations, example-level predictions, scores, input fingerprints and the selected pack. Gold text is not included in the report, but ids, gold labels and candidate descriptions may still be sensitive. Individual HTTP inference records are not persisted by this runner; instrument a predictor when you need a full model audit trail.
+
+## Shareable demo report
+
+Run `npm run demo:report` to capture this repository’s bundled example as one JSON object with the project purpose, version and complete demo output. The command fails if the demo fails, so the report is useful when sharing a reproducible first look or reporting unexpected behavior. The bundled demo’s data and safety boundaries still apply.
 
 ## Validation
 
